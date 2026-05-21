@@ -1,32 +1,42 @@
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
 #include <iostream>
+
+#include "Window.h"
+#include "Renderer.h"
+
+void FramebufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+    auto* renderer = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+    if (renderer)
+    {
+        renderer->Clear();
+        glfwSwapBuffers(window);
+    }
+}
 
 int main()
 {
-    glfwInit();
+    Window window(1280, 720, "Lifeline Engine");
 
-    GLFWwindow* window =
-        glfwCreateWindow(1280, 720, "Engine", nullptr, nullptr);
-
-    glfwMakeContextCurrent(window);
-
-    if (!gladLoadGL())
-    {
-        std::cout << "Failed to initialize GLAD\n";
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         return -1;
-    }
 
-    while (!glfwWindowShouldClose(window))
+    glViewport(0, 0, 1280, 720);
+
+    Renderer renderer;
+    renderer.Init();
+    renderer.SetClearColor(0.2f, 0.3f, 0.4f, 1.0f);
+
+    glfwSetWindowUserPointer(window.GetNativeWindow(), &renderer);
+    glfwSetFramebufferSizeCallback(window.GetNativeWindow(), FramebufferSizeCallback);
+
+    while (!window.ShouldClose())
     {
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        renderer.Clear();
+        window.SwapBuffers();
+        window.PollEvents();
     }
-
-    glfwTerminate();
 
     return 0;
 }
