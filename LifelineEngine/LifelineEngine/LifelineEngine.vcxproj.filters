@@ -16,9 +16,12 @@
     <Filter Include="Source Files\Renderer">
       <UniqueIdentifier>{75565aa9-3167-4fce-a532-d47dc554504e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\EntryPoints">
+      <UniqueIdentifier>{be828425-fbb3-4ab1-af0b-28311d60a588}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="EngineMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\glad.c">
@@ -29,6 +32,15 @@
     </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>Source Files\EntryPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\EntryPoints</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineMain.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
